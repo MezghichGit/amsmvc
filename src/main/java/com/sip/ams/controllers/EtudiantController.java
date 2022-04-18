@@ -4,7 +4,13 @@ import java.util.*;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
 import com.sip.ams.entities.*;
 @Controller
 @RequestMapping("/etudiant")
@@ -27,10 +33,25 @@ public class EtudiantController {
 		return "etudiant/listEtudiant";
 	}
 	
-	@RequestMapping("/add")
-	public String formAdd()
-	{	
+	@GetMapping("/add")
+	public String formAdd(Model m)
+	{	Etudiant e = new Etudiant();
+		m.addAttribute("etudiant", e);
 		return "etudiant/addEtudiant";
 	}
+	
+	@PostMapping("/add")
+	//@ResponseBody
+	//public String saveEtudiant(@RequestParam("nom") String nom,@RequestParam("email") String email,@RequestParam("age") int age)
+	public String saveEtudiant(Etudiant etudiant)
+	{	
+		//return "etudiant/saveEtudiant";
+		Etudiant e = new Etudiant(etudiant.getNom(),etudiant.getEmail(),etudiant.getAge());
+		//return nom +" "+email +" "+age;
+		students.add(e);
+		return "redirect:list";
+		
+	}
+
 
 }
