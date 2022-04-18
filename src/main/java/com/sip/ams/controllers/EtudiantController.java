@@ -10,15 +10,27 @@ import com.sip.ams.entities.*;
 @RequestMapping("/etudiant")
 public class EtudiantController {
 	
-	@RequestMapping("/list")
-	public String listEtudiant(Model m)
-	{
-		List<Etudiant> students = new ArrayList<>();
+	public static List<Etudiant> students = new ArrayList<>();
+	
+	static {
+		
 		students.add(new Etudiant("Yosri","y@gmail.com",24));
 		students.add(new Etudiant("Haitham","h@gmail.com",23));
 		students.add(new Etudiant("Amine","a@gmail.com",25));
+	}
+	
+	@RequestMapping("/list")
+	public String listEtudiant(Model m)
+	{
+		
 		m.addAttribute("students", students);
 		return "etudiant/listEtudiant";
+	}
+	
+	@RequestMapping("/add")
+	public String formAdd()
+	{	
+		return "etudiant/addEtudiant";
 	}
 
 }
