@@ -1,6 +1,10 @@
 package com.sip.ams.entities;
 
 public class Etudiant {
+	@Override
+	public String toString() {
+		return "Etudiant [nom=" + nom + ", email=" + email + ", age=" + age + "]";
+	}
 	private String nom;
 	private String email;
 	private int age;
