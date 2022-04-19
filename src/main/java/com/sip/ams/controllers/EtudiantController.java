@@ -76,5 +76,51 @@ public class EtudiantController {
 		return "redirect:../list";
 	}
 
+	@GetMapping("/update/{email}")
+	//@ResponseBody
+	public String getUpdateEtudiant(@PathVariable("email") String mail, Model m)
+	{	
+		int index = 0;
+		
+		for(int i=0; i<students.size(); i++)
+		{
+			if(students.get(i).getEmail().equals(mail))
+			{
+				index = i;
+				break;
+			}
+		}
+		
+		Etudiant e = students.get(index);
+		m.addAttribute("etudiant", e);
+
+		
+		return "etudiant/updateEtudiant";
+	}
+	
+	@PostMapping("/update")
+	//@ResponseBody
+	public String updateEtudiant(Etudiant etudiant)
+	{	
+		int index = 0;
+		
+		for(int i=0; i<students.size(); i++)
+		{
+			if(students.get(i).getEmail().equals(etudiant.getEmail()))
+			{
+				index = i;
+				break;
+			}
+		}
+		
+		students.get(index).setNom(etudiant.getNom());
+		//students.get(index).setEmail(etudiant.getEmail());
+		students.get(index).setAge(etudiant.getAge());
+
+
+		
+		return "redirect:list";
+	}
+
 
 }
